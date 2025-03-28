@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<BorderPane fx:id="mainPane" fx:controller="database.MainController"
+    xmlns="http://javafx.com/javafx/21"
+    xmlns:fx="http://javafx.com/fxml"
+    stylesheets="@styles.css">
+
+    <!-- Top Bar -->
+<top>
+    <HBox fx:id="topBar" styleClass="top-bar" style="-fx-padding: 10;" spacing="15">
+    <!-- Toggle -->
+<ToggleButton fx:id="themeToggle" styleClass="theme-slider" onAction="#toggleTheme">
+    <graphic>
+        <StackPane prefWidth="60" prefHeight="30">
+            <!-- Track background -->
+            <Rectangle width="60" height="30" arcWidth="15" arcHeight="15" styleClass="slider-track"/>
+            
+            <!-- Icons -->
+            <HBox alignment="CENTER" spacing="15">
+                <Label text="☀️" styleClass="sun-icon"/>
+                <Label text="🌙" styleClass="moon-icon"/>
+            </HBox>
+            
+            <!-- Thumb circle -->
+            <Circle radius="13" styleClass="slider-thumb"/>
+        </StackPane>
+    </graphic>
+    <tooltip>
+        <Tooltip text="Toggle Light/Dark Mode"/>
+    </tooltip>
+</ToggleButton>
+
+        <!-- Push Everything Else to the Right -->
+        <Region HBox.hgrow="ALWAYS"/>
+        
+        <TextField fx:id="searchField" promptText="Search Task"/>
+        <Button fx:id="searchButton" text="Search" onAction="#searchTask"/>
+        <Button fx:id="clearButton" text="Clear" onAction="#clearSearch"/>
+    </HBox>
+</top>
+
+
+    <!-- Center Section -->
+    <center>
+        <HBox spacing="20" style="-fx-padding: 10;">
+
+            <!-- Sticky Notes Container (LARGER, LEFT SIDE) -->
+            <VBox spacing="10" HBox.hgrow="ALWAYS">
+                <ScrollPane fx:id="taskScrollPane" fitToWidth="true" prefHeight="600" styleClass="light-mode">
+                    <FlowPane fx:id="taskGrid" hgap="15" vgap="15" prefWrapLength="600"/>
+                </ScrollPane>
+            </VBox>
+
+            <!-- Right Panel: Sticky Note Input UI -->
+            <VBox fx:id="rightPanel" prefWidth="300" spacing="10" style="-fx-padding: 10;">
+               <VBox fx:id="stickyNoteInput" styleClass="sticky-note-input" spacing="5" style="-fx-padding: 10;">
+                    <Label text="Make New Sticky Note" 
+                        style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                    <TextField fx:id="titleField" promptText="Enter task title..."/>
+                    <TextArea fx:id="descriptionField" promptText="Enter task description..." prefRowCount="4" wrapText="true"/>
+                    <DatePicker fx:id="dueDatePicker" promptText="Enter Due Date..."/>
+                    <Label fx:id="messageLabel" text="" visible="false"/>
+                    <Button fx:id="addButton" text="Add Task" onAction="#addTask"/>
+                </VBox>
+            </VBox>
+        </HBox>
+    </center>
+
+</BorderPane>
